@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Data</title>
+    <style>
+        :root {
+            --primary-color: #2b6cb0;
+            --secondary-color: #ebf8ff;
+            --text-color: #2d3748;
+            --background-color: #f7fafc;
+            --card-background: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            background: linear-gradient(135deg, var(--primary-color), #4299e1);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            font-size: 1.75rem;
+            box-shadow: 0 4px 6px rgba(43, 108, 176, 0.1);
+        }
+
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-collapse: separate;
+            border-spacing: 0;
+            background-color: var(--card-background);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        }
+
+        th, td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border: none;
+        }
+
+        th {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            font-size: 1.1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        tr:hover {
+            background-color: var(--secondary-color);
+            transition: background-color 0.2s ease;
+        }
+
+        .empty-message {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #718096;
+            background-color: var(--card-background);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                padding: 1rem;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 0.75rem 1rem;
+            }
+
+            td {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Weather Data</h1>
+    
+    {% if error %}
+        <p class="empty-message">{{ error }}</p>
+    {% elif weather %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Location</th>
+                    <th>Temperature</th>
+                    <th>Humidity</th>
+                    <th>Wind Speed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ weather.city }}</td>
+                    <td>{{ weather.temperature }} °C</td>
+                    <td>{{ weather.humidity }} %</td>
+                    <td>{{ weather.wind_speed }} m/s</td>
+                </tr>
+            </tbody>
+        </table>
+    {% else %}
+        <p class="empty-message">No weather data available at the moment.</p>
+    {% endif %}
+</body>
+</html>
